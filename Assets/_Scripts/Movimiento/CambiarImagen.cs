@@ -9,17 +9,30 @@ public class SpriteEnemigo : MonoBehaviour
     public Sprite imagenValor1;
     public Sprite imagenValor2;
 
-    // Supongamos que esta función es llamada cuando se cambia el valor
-    public void ActualizarImagen(int valor)
+
+    // Start is called before the first frame update
+    void Start()
     {
+        // Aquí se obtiene el valor guardado
+        int valor = PlayerPrefs.GetInt("valor");
+
+        // Aquí se cambia la imagen dependiendo del valor
         if (valor == 1)
         {
             imagen.sprite = imagenValor1;
+            Debug.Log("valor 1");
         }
         else if (valor == 2)
         {
             imagen.sprite = imagenValor2;
+            Debug.Log("valor 2");
         }
-        // Puedes agregar más condiciones según sea necesario para otros valores
+        else
+        {
+            Debug.Log("valor no encontrado");
+            valor = 0;
+        }
     }
+ 
+    
 }
