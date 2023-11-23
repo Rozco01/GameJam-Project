@@ -8,11 +8,15 @@ public class RouletteController : MonoBehaviour
     private bool[] stopped;
     private int[] wheelNumbers;
     public GameObject RouletteMiniGame;
-
+    public GameObject attackButton;
     [SerializeField] private LifeController lifeController;
+    private bool shieldBroken = false;
+
+    private int currentWheelIndex = 0;
 
     void Start()
     {
+        attackButton.SetActive(true);
         RouletteMiniGame.SetActive(false);
         spinning = new bool[wheels.Length];
         stopped = new bool[wheels.Length];
@@ -21,6 +25,19 @@ public class RouletteController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Detener la rueda actual cuando se presiona la tecla de espacio
+            StopSpin(currentWheelIndex);
+            currentWheelIndex++;
+
+            // Verificar si se alcanzó el final de las ruedas y reiniciar
+            if (currentWheelIndex >= wheels.Length)
+            {
+                currentWheelIndex = 0;
+            }
+        }
+
         for (int i = 0; i < wheels.Length; i++)
         {
             if (spinning[i] && !stopped[i])
@@ -36,6 +53,10 @@ public class RouletteController : MonoBehaviour
         RouletteMiniGame.SetActive(true);
         spinning[index] = true;
         stopped[index] = false;
+
+        // Restaurar visualmente el escudo al inicio del giro
+        lifeController.RestoreVisualShield();
+        attackButton.SetActive(false);
     }
 
     public void StopSpin(int index)
@@ -58,44 +79,62 @@ public class RouletteController : MonoBehaviour
             // Mark the wheel as stopped to prevent the message from being shown again
             stopped[index] = true;
 
+            // Check if the shield is broken
+            if (lifeController.IsShieldBroken())
+            {
+                // Restore the shield
+                lifeController.RestoreShield();
+                shieldBroken = false;
+            }
+
             // Save the number where the wheel stopped
             wheelNumbers[index] = number;
 
             // Check if all wheels have stopped
             if (AllWheelsStopped())
             {
-                float totalLife = 100;
-                
                 int sum = CalculateSumOfWheelNumbers();
                 float lifeLost = (float)sum;
 
-                lifeController.ChangeLife(totalLife - lifeLost);
+                lifeController.ChangeLife(lifeLost);
                 Debug.Log($"The sum of the numbers on the wheels is: {sum}");
+
+                // Reset shieldBroken for the next turn
+                shieldBroken = false;
             }
         }
     }
 
+    // Método para indicar que el escudo se ha roto
+    public void BreakShield()
+    {
+        shieldBroken = true;
+        attackButton.SetActive(true);
+    }
+
     int DetermineNumber(float angle)
     {
-        // You can use ranges to handle cases
-        if (angle >= 0 && angle < 90)
+        float normalizedAngle = (angle + 360) % 360; // Normalizar el ángulo a un rango positivo
+
+        // Utilizar rangos para manejar casos
+        if (normalizedAngle >= 0 && normalizedAngle < 35)
         {
-            return 10; // Red, number 10
+            return 25; // Azul, número 25
         }
-        else if (angle >= 90 && angle < 180)
+        else if (normalizedAngle >= 35 && normalizedAngle < 125)
         {
-            return 7; // Green, number 7
+            return 20; // Verde, número 20
         }
-        else if (angle >= 180 && angle < 270)
+        else if (normalizedAngle >= 125 && normalizedAngle < 235)
         {
-            return 5; // Yellow, number 5
+            return 15; // Amarillo, número 15
         }
-        else if (angle >= 270 && angle < 360)
+        else if (normalizedAngle >= 235 && normalizedAngle < 360)
         {
-            return 0; // Blue, number 0
+            return 0; // rojo, número 0
         }
 
-        return -1; // Default value if no condition is met
+        return -1; // Valor predeterminado si no se cumple ninguna condición
     }
 
     bool AllWheelsStopped()
