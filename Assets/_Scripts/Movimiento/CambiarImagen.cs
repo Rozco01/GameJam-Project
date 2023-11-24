@@ -8,6 +8,7 @@ public class SpriteEnemigo : MonoBehaviour
     public Image imagen;
     public Sprite imagenValor1;
     public Sprite imagenValor2;
+    public Sprite imagenValor3;
 
 
     // Start is called before the first frame update
@@ -26,6 +27,11 @@ public class SpriteEnemigo : MonoBehaviour
         {
             imagen.sprite = imagenValor2;
             Debug.Log("valor 2");
+        }
+        else if (valor == 3)
+        {
+            imagen.sprite = imagenValor3;
+            Debug.Log("valor 3");
         }
         else
         {

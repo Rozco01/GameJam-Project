@@ -38,7 +38,7 @@ public class GrappleHook : MonoBehaviour
 
             line.SetPosition(0, transform.position);
 
-            if (Vector2.Distance(transform.position, target) < 0.7f)
+            if (Vector2.Distance(transform.position, target) < 0.5f)
             {
                 retracting = false;
                 isGrappling = false;
@@ -90,7 +90,7 @@ public class GrappleHook : MonoBehaviour
 
         Debug.Log("Hit");
 
-       if (hit.collider.gameObject.tag == "enemy" || hit.collider.gameObject.tag == "enemy2")
+       if (hit.collider.gameObject.tag == "enemy" || hit.collider.gameObject.tag == "enemy2" || hit.collider.gameObject.tag == "enemy3")
         {
             batalla = true;
             Debug.Log("batalla");

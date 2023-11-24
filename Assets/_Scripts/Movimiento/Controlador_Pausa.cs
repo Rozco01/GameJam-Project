@@ -30,6 +30,7 @@ public class Controlador_Pausa : MonoBehaviour
         PausarObjetosConEtiqueta("Player");
         PausarObjetosConEtiqueta("enemy");
         PausarObjetosConEtiqueta("enemy2");
+        PausarObjetosConEtiqueta("enemy3");
         movimiento.speed = 0;
         grappelHook.isGrappling = true;
          
@@ -42,6 +43,7 @@ public class Controlador_Pausa : MonoBehaviour
         ReanudarObjetosConEtiqueta("Player");
         ReanudarObjetosConEtiquetaEnemigo("enemy");
         ReanudarObjetosConEtiquetaEnemigo("enemy2");
+        ReanudarObjetosConEtiquetaEnemigo("enemy3");
         movimiento.speed = 3;
         grappelHook.isGrappling = false;
     }
