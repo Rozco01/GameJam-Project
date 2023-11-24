@@ -23,12 +23,7 @@ public class ButtonMashingGameController : MonoBehaviour
 
     void Start()
     {
-
-        
-        controlador_Pausa = FindObjectOfType<Controlador_Pausa>();
-        
-
-
+        controladorPausa = FindObjectOfType<Controlador_Pausa>();
         ResetGame();
     }
 

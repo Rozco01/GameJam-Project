@@ -31,7 +31,7 @@ public class Controlador_Pausa : MonoBehaviour
         PausarObjetosConEtiqueta("enemy");
         PausarObjetosConEtiqueta("enemy2");
         movimiento.speed = 0;
-        playerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+      
         grappelHook.isGrappling = true;
          
 
@@ -56,6 +56,7 @@ public class Controlador_Pausa : MonoBehaviour
         foreach (GameObject objeto in objetos)
         {
             objeto.GetComponent<Rigidbody2D>().isKinematic = true;
+            objeto.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
 
@@ -73,6 +74,7 @@ public class Controlador_Pausa : MonoBehaviour
         foreach (GameObject objeto in objetos)
         {
             objeto.GetComponent<Rigidbody2D>().isKinematic = false;
+            objeto.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
     }
 

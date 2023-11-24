@@ -38,7 +38,7 @@ public class GrappleHook : MonoBehaviour
 
             line.SetPosition(0, transform.position);
 
-            if (Vector2.Distance(transform.position, target) < 0.7f)
+            if (Vector2.Distance(transform.position, target) < 0.8f)
             {
                 retracting = false;
                 isGrappling = false;
