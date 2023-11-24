@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonMashingGameController : MonoBehaviour
 {
+    private Controlador_Pausa controlador_Pausa;
     public Slider progressBar;
     public float intensity = 3f; // Intensidad de descenso de la barra (ajustable en el inspector)
     public float countdownTime = 10.0f; // Tiempo para alcanzar el rango objetivo
@@ -16,9 +18,17 @@ public class ButtonMashingGameController : MonoBehaviour
     [SerializeField] private GameObject miniGameObject;
     private bool gameActive = false;
 
+   
+
+
     void Start()
     {
+
         
+        controlador_Pausa = FindObjectOfType<Controlador_Pausa>();
+        
+
+
         ResetGame();
     }
 
@@ -33,9 +43,13 @@ public class ButtonMashingGameController : MonoBehaviour
             if (currentProgressBarValue < targetRange && countdownTime <= 0)
             {
                 Debug.Log("¡Juego perdido! No has alcanzado el rango objetivo.");
+
                 gameActive = false; // Detener el juego
                 miniGameObject.SetActive(false); // Desactivar el minijuego
                 atackButton.SetActive(true); // Activar el botón de ataque
+                controlador_Pausa.ReanudarJuego();
+                SceneManager.UnloadSceneAsync("TurnBasedCombat");
+
 
             }
             else
@@ -51,6 +65,8 @@ public class ButtonMashingGameController : MonoBehaviour
                     gameActive = false; // Detener el juego
                     miniGameObject.SetActive(false); // Desactivar el minijuego
                     atackButton.SetActive(true); // Activar el botón de ataque
+                    controlador_Pausa.ReanudarJuego();
+                    SceneManager.UnloadSceneAsync("TurnBasedCombat");
                 }
             }
 
@@ -84,6 +100,7 @@ public class ButtonMashingGameController : MonoBehaviour
     void ResetGame()
     {
         // Reiniciar valores del juego
+
         buttonPressCount = 0;
         currentProgressBarValue = 0;
         progressBar.value = currentProgressBarValue;

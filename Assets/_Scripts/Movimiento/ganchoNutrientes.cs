@@ -35,7 +35,7 @@ public class ganchoNutrientes : MonoBehaviour {
 
             line.SetPosition(0, transform.position);
 
-            if (rotacionNutrientes.transform.rotation.z >= 1f) {
+            if (rotacionNutrientes.transform.rotation.z >= 1.2f) {
                 retracting = false;
                 isGrappling = false;
                 line.enabled = false;
