@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imagen: {fileID: 716570686}
-  imagenValor1: {fileID: 21300000, guid: ff110279aecfb0d4fa9a4b067c45f3f4, type: 3}
+  imagenValor1: {fileID: 1215975141, guid: ffcf03cc600c02247988d5235de46262, type: 3}
   imagenValor2: {fileID: 21300000, guid: 5c28812a47a7fc9499672d414ebac12a, type: 3}
 --- !u!114 &716570686
 MonoBehaviour:
