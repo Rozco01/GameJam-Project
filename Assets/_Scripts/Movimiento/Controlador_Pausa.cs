@@ -9,6 +9,7 @@ public class Controlador_Pausa : MonoBehaviour
     private bool juegoPausado = false;
 
     public  Rigidbody2D playerRigidbody;
+ 
     private movimienti movimiento;
 
     
@@ -19,6 +20,7 @@ public class Controlador_Pausa : MonoBehaviour
         movimiento = FindObjectOfType<movimienti>();
         playerRigidbody = FindObjectOfType<Rigidbody2D>();
         grappelHook = FindObjectOfType<GrappleHook>();
+       
 
 
     }
@@ -58,6 +60,7 @@ public class Controlador_Pausa : MonoBehaviour
             objeto.GetComponent<Rigidbody2D>().isKinematic = true;
             objeto.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
+
              
 
         }
@@ -69,6 +72,7 @@ public class Controlador_Pausa : MonoBehaviour
         foreach (GameObject objeto in objetos)
         {
             objeto.GetComponent<Rigidbody2D>().isKinematic = true;
+            
             
         }
     }
