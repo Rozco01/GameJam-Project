@@ -18,14 +18,16 @@ public class GrappleHook : MonoBehaviour
     Vector2 target;
 
     RaycastHit2D hit;
+    public  Rigidbody2D playerRigidbody;
     private void Start()
     {
+        playerRigidbody = FindObjectOfType<Rigidbody2D>();
         line = GetComponent<LineRenderer>();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isGrappling)
+        if (Input.GetMouseButtonDown(1) && !isGrappling)
         {
             StartGrapple();
         }
@@ -43,6 +45,8 @@ public class GrappleHook : MonoBehaviour
                 retracting = false;
                 isGrappling = false;
                 line.enabled = false;
+                playerRigidbody.gameObject.GetComponent<movimienti>().speed = 0;
+
             }
         }
     }
