@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f018463b23a4d4e9401dd8b29000c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginBattle: {fileID: 1802281779}
   text: {fileID: 871538552}
 --- !u!1 &270602462
 GameObject:
@@ -3304,7 +3303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jugador: {fileID: 1802281786}
   velocidad: 3
-  rangoPersecucion: 4
+  rangoPersecucion: 3
 --- !u!1 &2133723176
 GameObject:
   m_ObjectHideFlags: 0
