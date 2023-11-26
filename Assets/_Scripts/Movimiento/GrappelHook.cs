@@ -18,7 +18,7 @@ public class GrappleHook : MonoBehaviour
     Vector2 target;
 
     RaycastHit2D hit;
-    public  Rigidbody2D playerRigidbody;
+    public Rigidbody2D playerRigidbody;
     private void Start()
     {
         playerRigidbody = FindObjectOfType<Rigidbody2D>();
@@ -45,8 +45,6 @@ public class GrappleHook : MonoBehaviour
                 retracting = false;
                 isGrappling = false;
                 line.enabled = false;
-                playerRigidbody.gameObject.GetComponent<movimienti>().speed = 0;
-
             }
         }
     }
@@ -65,9 +63,8 @@ public class GrappleHook : MonoBehaviour
             line.positionCount = 2;
 
             StartCoroutine(Grapple());
-
-
         }
+
     }
 
     IEnumerator Grapple()
@@ -94,7 +91,7 @@ public class GrappleHook : MonoBehaviour
 
         Debug.Log("Hit");
 
-       if (hit.collider.gameObject.tag == "enemy" || hit.collider.gameObject.tag == "enemy2" || hit.collider.gameObject.tag == "enemy3")
+        if (hit.collider.gameObject.tag == "enemy" || hit.collider.gameObject.tag == "enemy2" || hit.collider.gameObject.tag == "enemy3")
         {
             batalla = true;
             Debug.Log("batalla");
