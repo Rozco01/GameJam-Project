@@ -37,6 +37,7 @@ public class Puntos : MonoBehaviour
     void Update()
     {
 
+         puntosBattle = PlayerPrefs.GetInt("Nivel1");
         if (PlayerPrefs.HasKey("puntosBattle"))
         {
             puntosBattle = PlayerPrefs.GetInt("puntosBattle");

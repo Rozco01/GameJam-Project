@@ -5,23 +5,21 @@ using UnityEngine;
 public class BridgeController : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI text;
-    private int valorGanar = 0;
+    private int valorGanar;
     private int puntosJudador = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        puntosJudador = PlayerPrefs.GetInt("valorGanar");
+        PlayerPrefs.SetInt("puntosNivel1", 0);
         // Puedes agregar código de inicialización aquí si es necesario
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (valorGanar == 3)
-        {
-            text.text = "Ganaste";
-        }
+        valorGanar = PlayerPrefs.GetInt("puntosNivel1");
+
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -31,18 +29,31 @@ public class BridgeController : MonoBehaviour
             text.text = "Oprime Espacio para crear puente";
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (PlayerPrefs.GetInt("valor") == 0)
+                if (valorGanar >= 3)
                 {
-                    // Puedes agregar código aquí si es necesario cuando el jugador no tiene puntos
+                    text.text = "Ganaste";
+                    valorGanar = valorGanar - 3;
+                    PlayerPrefs.SetInt("puntosNivel1", valorGanar);
+                     PlayerPrefs.SetInt("puntosBattle", valorGanar);
+                    PlayerPrefs.Save();
+                    Debug.Log("Ganaste " + valorGanar);
+
                 }
-                else if (PlayerPrefs.GetInt("valor") > 0)
+                else if (valorGanar < 3)
                 {
-                    valorGanar++;
-                    puntosJudador--;
-                    PlayerPrefs.SetInt("valorGanar", puntosJudador); 
+                    text.text = "Numero de puntos insuficientes";
+                    Debug.Log("Numero de puntos insuficientes" + valorGanar);
+
+
+
+
                 }
+
+
             }
         }
+
+
     }
 
     // Este método se llama cuando el jugador sale del collider
