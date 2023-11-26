@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonMashingGameController : MonoBehaviour
 {
+   
     private Controlador_Pausa controlador_Pausa;
     public Slider progressBar;
     public float intensity = 3f; // Intensidad de descenso de la barra (ajustable en el inspector)
@@ -17,11 +18,16 @@ public class ButtonMashingGameController : MonoBehaviour
     private float currentProgressBarValue;
     [SerializeField] private GameObject miniGameObject;
     private bool gameActive = false;
+    public int valorPuntos;// Variable pública para almacenar los puntos ganados
+    // END: abpxx6d04wxr
 
     void Start()
     {
         controlador_Pausa = FindObjectOfType<Controlador_Pausa>();
+
         ResetGame();
+        valorPuntos  = PlayerPrefs.GetInt("puntosNivel1"); // Obtener el valor de puntos
+        
     }
 
     void Update()
@@ -56,7 +62,14 @@ public class ButtonMashingGameController : MonoBehaviour
                     miniGameObject.SetActive(false); // Desactivar el minijuego
                     atackButton.SetActive(true); // Activar el botón de ataque
                     controlador_Pausa.ReanudarJuego();
+                    valorPuntos++; // Sumar uno al valor de puntos
+                    PlayerPrefs.SetInt("puntosBattle", valorPuntos); // Guardar el valor de puntos
+                    PlayerPrefs.Save();
                     SceneManager.UnloadSceneAsync("TurnBasedCombat");
+                   
+
+
+
                 }
             }
 
